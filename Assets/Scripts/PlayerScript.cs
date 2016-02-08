@@ -31,7 +31,8 @@ public class PlayerScript : MonoBehaviour {
 			lastAppliedForce = gravity(ps);
 			rigid.AddForce(lastAppliedForce);
 		}
-	}
+        this.gameObject.transform.LookAt(this.gameObject.transform.position + this.GetComponent<Rigidbody>().velocity, new Vector3(0, 0, 1));
+    }
 	
 	Vector3 gravity(PlanetScript ps) {
 		Vector3 displacement = ps.gameObject.transform.position - transform.position;

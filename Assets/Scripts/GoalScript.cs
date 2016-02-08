@@ -38,13 +38,14 @@ public class GoalScript : MonoBehaviour {
 		}
 	}
 
-	// For debug
-	void OnTriggerExit(Collider coll) {
-		win = false;
-	}
+    //For debug
+    //void OnTriggerExit(Collider coll)
+    //{
+    //    win = false;
+    //}
 
-	// Throw whatever is related to win state here
-	void winState() {
+    // Throw whatever is related to win state here
+    void winState() {
 		SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex + 1);
 	}
 

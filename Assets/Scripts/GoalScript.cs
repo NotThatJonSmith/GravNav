@@ -26,13 +26,15 @@ public class GoalScript : MonoBehaviour {
 
 	void OnTriggerStay(Collider coll)
 	{
-		// If finish line, then just use box collider
-		if (GoalMode == goalMode.FinishLine) {
-			win = isInGoal (coll);
-		} 
-		// If zone, then calculate to see if in the circle
-		else if (GoalMode == goalMode.Zone) {
-			win = isInCircle (coll.transform.position);
+		if (coll.tag == "Player") {
+			// If finish line, then just use box collider
+			if (GoalMode == goalMode.FinishLine) {
+				win = isInGoal (coll);
+			} 
+			// If zone, then calculate to see if in the circle
+			else if (GoalMode == goalMode.Zone) {
+				win = isInCircle (coll.transform.position);
+			}
 		}
 	}
 

@@ -31,7 +31,10 @@ public class PlayerScript : MonoBehaviour {
 			lastAppliedForce = gravity(ps);
 			rigid.AddForce(lastAppliedForce);
 		}
-        this.gameObject.transform.LookAt(this.gameObject.transform.position + this.GetComponent<Rigidbody>().velocity, new Vector3(0, 0, 1));
+		if (rigid.velocity.magnitude != 0f) {
+			transform.rotation = Quaternion.LookRotation(Vector3.forward, rigid.velocity.normalized);
+		}
+		
     }
 	
 	Vector3 gravity(PlanetScript ps) {
@@ -41,5 +44,15 @@ public class PlayerScript : MonoBehaviour {
 
 	void OnDrawGizmos() {
 		Gizmos.DrawLine(transform.position, transform.position + 4 * lastAppliedForce);
+	}
+
+	public float forecastTime = 3.0f;
+	void drawTrajectory() {
+		Vector3 cumulativeForce = Vector3.zero;
+		foreach (PlanetScript ps in attractors) {
+			if (ps.disableForce) continue;
+			lastAppliedForce = gravity(ps);
+			rigid.AddForce(lastAppliedForce);
+		}
 	}
 }

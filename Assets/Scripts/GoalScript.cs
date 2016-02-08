@@ -47,16 +47,9 @@ public class GoalScript : MonoBehaviour {
 	}
 
 	bool isInCircle (Vector3 objPos) {
-		//Debug.DrawLine (objPos, transform.position, Color.red);
-
 		Vector3 distance = objPos - transform.position;
 		distance.x = distance.x / ((transform.localScale.x + 1f)*0.5f);
 		distance.y = distance.y / ((transform.localScale.y+ 1f)*0.5f);
-
-		// print ("Orig. distance:" + (objPos - transform.position) + 
-		// 	" distance:" + distance + " magnitude:" + distance.magnitude +
-		//	"scale division:" + ((transform.localScale.x + 1f)*0.5f));
-		// Debug.DrawRay (transform.position, distance, Color.green);
 
 		// By "scaling down" manually, it should be back to a unit circle
 		if (distance.magnitude <= 1.0f)

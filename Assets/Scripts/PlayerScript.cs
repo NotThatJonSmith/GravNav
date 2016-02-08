@@ -22,10 +22,12 @@ public class PlayerScript : MonoBehaviour {
 			return;
 		}
 		S = gameObject;
+		// TODO populate the array with ALL attractors in scene?
 	}
 	
 	void FixedUpdate() {
 		foreach (PlanetScript ps in attractors) {
+			if (ps.disableForce) continue;
 			lastAppliedForce = gravity(ps);
 			rigid.AddForce(lastAppliedForce);
 		}

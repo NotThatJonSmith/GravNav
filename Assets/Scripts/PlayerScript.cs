@@ -9,9 +9,11 @@ public class PlayerScript : MonoBehaviour {
 	public Vector3 initialVelocity;
 	public PlanetScript[] attractors;
 	public Vector3 lastAppliedForce;
+	public LineRenderer lr;
 
 	void Start() {
 		rigid = GetComponent<Rigidbody>();
+		lr = GetComponent<LineRenderer>();
 		if (rigid == null) print("Error! No Rigidbody component on Player");
 		rigid.velocity = initialVelocity;
 	}
@@ -50,12 +52,15 @@ public class PlayerScript : MonoBehaviour {
 		Gizmos.DrawLine(transform.position, transform.position + 4 * lastAppliedForce);
 	}
 
-	public float forecastTime = 100.0f;
-	public float deadZoneRadius = 2f;
+	private float forecastTime = 4.0f;
+	private float deadZoneRadius = 2f;
+	private float granularity = 0.1f;
 	void drawTrajectory() {
-		int trajectorySteps = (int)(forecastTime / Time.timeScale);
+		int trajectorySteps = (int)(forecastTime / granularity);
 		Vector3 pos = transform.position;
 		Vector3 vel = rigid.velocity;
+		Vector3[] points = new Vector3[trajectorySteps+1];
+		points[0] = pos;
 		for (int i = 0; i < trajectorySteps; i++) {
 			Vector3 cumulativeForce = Vector3.zero;
 			foreach (PlanetScript ps in attractors) {
@@ -63,16 +68,20 @@ public class PlayerScript : MonoBehaviour {
 				cumulativeForce += gravity(ps, pos);
 			}
 			Vector3 nextPos = pos;
-			vel += cumulativeForce / rigid.mass / Time.timeScale;
-			nextPos += vel / Time.timeScale;
+			vel += cumulativeForce / rigid.mass * granularity;
+			nextPos += vel * granularity;
 			foreach (PlanetScript ps in attractors) {
 				if (ps.disableForce) continue;
 				if ((ps.gameObject.transform.position - nextPos).magnitude < deadZoneRadius) return;
 			}
 			Debug.DrawLine(pos, nextPos, Color.red);
 			pos = nextPos;
+			points[i + 1] = pos;
 
 		}
+
+		lr.SetVertexCount(trajectorySteps + 1);
+		lr.SetPositions(points);
 		
 	}
 }

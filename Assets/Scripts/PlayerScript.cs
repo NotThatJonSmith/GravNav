@@ -50,6 +50,11 @@ public class PlayerScript : MonoBehaviour {
 		return displacement.normalized * ps.strengthOfAttraction / displacement.magnitude;
 	}
 
+    void OnCollisionEnter(Collision coll)
+    {
+        Debug.Log("CONTACT.");
+    }
+
 	void OnDrawGizmos() {
 		Gizmos.DrawLine(transform.position, transform.position + 4 * lastAppliedForce);
 	}
@@ -57,6 +62,7 @@ public class PlayerScript : MonoBehaviour {
 	private float forecastTime = 4.0f;
 	private float deadZoneRadius = 2f;
 	private float granularity = 0.1f;
+
 	void drawTrajectory() {
 		int trajectorySteps = (int)(forecastTime / granularity);
 		Vector3 pos = transform.position;

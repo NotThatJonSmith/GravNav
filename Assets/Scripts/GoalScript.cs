@@ -10,11 +10,15 @@ public class GoalScript : MonoBehaviour {
 	public GameObject goalSpriteRenderer;
 	public Sprite[] goalSprites;
 	public bool win;
+	public GameObject winScreen;
 
 	// Use this for initialization
 	void Start () {
 		goalSpriteRenderer.GetComponent<SpriteRenderer> ().sprite = goalSprites [(int)GoalMode];
 		win = false;
+
+		winScreen.SetActive (false);
+
         if(PlayerScript.S.GetComponent<PlayerScript>().pickups != PlayerScript.S.GetComponent<PlayerScript>().pickupsNeeded)
         {
             goalSpriteRenderer.GetComponent<SpriteRenderer>().color = new Color(1, 0, 0);
@@ -55,7 +59,7 @@ public class GoalScript : MonoBehaviour {
 
     // Throw whatever is related to win state here
     void winState() {
-		SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex + 1);
+		winScreen.SetActive(true);
 	}
 
 	bool isInCircle (Vector3 objPos) {

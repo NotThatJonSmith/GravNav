@@ -15,13 +15,22 @@ public class GoalScript : MonoBehaviour {
 	void Start () {
 		goalSpriteRenderer.GetComponent<SpriteRenderer> ().sprite = goalSprites [(int)GoalMode];
 		win = false;
+        if(PlayerScript.S.GetComponent<PlayerScript>().pickups != PlayerScript.S.GetComponent<PlayerScript>().pickupsNeeded)
+        {
+            goalSpriteRenderer.GetComponent<SpriteRenderer>().color = new Color(1, 0, 0);
+        }
 	}
 
 	// Update is called once per frame
 	void Update () {
-		if (win) {
-			winState ();
-		}
+        if (PlayerScript.S.GetComponent<PlayerScript>().pickups == PlayerScript.S.GetComponent<PlayerScript>().pickupsNeeded)
+        {
+            goalSpriteRenderer.GetComponent<SpriteRenderer>().color = new Color(0, 1, 0);
+            if (win)
+            {
+                winState();
+            }
+        }
 	}
 
 	void OnTriggerStay(Collider coll)
@@ -39,10 +48,10 @@ public class GoalScript : MonoBehaviour {
 	}
 
     //For debug
-    //void OnTriggerExit(Collider coll)
-    //{
-    //    win = false;
-    //}
+    void OnTriggerExit(Collider coll)
+    {
+        win = false;
+    }
 
     // Throw whatever is related to win state here
     void winState() {

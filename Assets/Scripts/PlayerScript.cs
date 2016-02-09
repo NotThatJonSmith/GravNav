@@ -10,6 +10,8 @@ public class PlayerScript : MonoBehaviour {
 	public PlanetScript[] attractors;
 	public Vector3 lastAppliedForce;
 	public LineRenderer lr;
+    public int pickups = 0;
+    public int pickupsNeeded = 0;
 
 	void Start() {
 		rigid = GetComponent<Rigidbody>();

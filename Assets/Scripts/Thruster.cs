@@ -2,38 +2,76 @@
 using System.Collections;
 
 public class Thruster : MonoBehaviour {
-    //The forward direction of the ship
-    //Thrust is applied opposite this
-    public Vector3 forwardVector;
-    //Multiplies the forwardVector to determine the force
+    public Vector3  upVector;
+    public int      upUses;
+    public Vector3  downVector;
+    public int      downUses;
+    public Vector3  leftVector;
+    public int      leftUses;
+    public Vector3  rightVector;
+    public int      rightUses;
+    public bool thrustActive;
     public float thrust;
-    //The starting fuel in seconds
-    public float initialFuel;
-    //How much fuel is left
-    //This does not need to be set in the Inspector
-    public float remainingFuel;
-    //If true, the force is being applied
-    public bool active;
+    public float thrustDuration;
+
+    private Vector3 oldVelocity;
+    private Rigidbody rigid;
+    private Vector3 thrustVector;
+    private float thrustTime;
+    private bool resetVelocity;
 
     // Use this for initialization
     void Start() {
-        remainingFuel = initialFuel;
-        active = false;
+        rigid = this.gameObject.GetComponent<Rigidbody>();
+        thrustActive = false;
+        resetVelocity = false;
     }
 
     // Update is called once per frame
     void Update() {
-        if (Input.GetKey("space") && remainingFuel > 0) {
-            active = true;
-            remainingFuel -= Time.deltaTime;
-        } else {
-            active = false;
+        if (Input.GetKeyDown(KeyCode.UpArrow) && upUses > 0) {
+            upUses--;
+            oldVelocity = rigid.velocity;
+            thrustActive = true;
+            thrustVector = upVector * thrust;
+            thrustTime = thrustDuration;
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow) && downUses > 0) {
+            downUses--;
+            oldVelocity = rigid.velocity;
+            thrustActive = true;
+            thrustVector = downVector * thrust;
+            thrustTime = thrustDuration;
+        }
+        if (Input.GetKeyDown(KeyCode.LeftArrow) && leftUses > 0) {
+            leftUses--;
+            oldVelocity = rigid.velocity;
+            thrustActive = true;
+            thrustVector = leftVector * thrust;
+            thrustTime = thrustDuration;
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow) && rightUses > 0) {
+            rightUses--;
+            oldVelocity = rigid.velocity;
+            thrustActive = true;
+            thrustVector = rightVector * thrust;
+            thrustTime = thrustDuration;
         }
     }
 
     void FixedUpdate() {
-        if (active) {
-            this.gameObject.GetComponent<Rigidbody>().AddRelativeForce(forwardVector * thrust * -1, ForceMode.Impulse);
+        if (resetVelocity) {
+            resetVelocity = false;
+            rigid.velocity = oldVelocity;
+        }
+
+        if (thrustActive && thrustTime > 0) {
+            rigid.AddRelativeForce(thrustVector, ForceMode.VelocityChange);
+            thrustTime -= Time.timeScale;
+            if (thrustTime <= 0) {
+                thrustActive = false;
+                resetVelocity = true;
+            }
         }
     }
 }

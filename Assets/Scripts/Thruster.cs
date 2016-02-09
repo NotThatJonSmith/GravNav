@@ -10,34 +10,68 @@ public class Thruster : MonoBehaviour {
     public int      leftUses;
     public Vector3  rightVector;
     public int      rightUses;
+    public bool thrustActive;
     public float thrust;
+    public float thrustDuration;
+
+    private Vector3 oldVelocity;
+    private Rigidbody rigid;
+    private Vector3 thrustVector;
+    private float thrustTime;
+    private bool resetVelocity;
 
     // Use this for initialization
     void Start() {
-
+        rigid = this.gameObject.GetComponent<Rigidbody>();
+        thrustActive = false;
+        resetVelocity = false;
     }
 
     // Update is called once per frame
     void Update() {
         if (Input.GetKeyDown(KeyCode.UpArrow) && upUses > 0) {
             upUses--;
-            this.gameObject.GetComponent<Rigidbody>().AddRelativeForce(upVector * thrust, ForceMode.Force);
+            oldVelocity = rigid.velocity;
+            thrustActive = true;
+            thrustVector = upVector * thrust;
+            thrustTime = thrustDuration;
         }
         if (Input.GetKeyDown(KeyCode.DownArrow) && downUses > 0) {
             downUses--;
-            this.gameObject.GetComponent<Rigidbody>().AddRelativeForce(downVector * thrust, ForceMode.Force);
+            oldVelocity = rigid.velocity;
+            thrustActive = true;
+            thrustVector = downVector * thrust;
+            thrustTime = thrustDuration;
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow) && leftUses > 0) {
             leftUses--;
-            this.gameObject.GetComponent<Rigidbody>().AddRelativeForce(leftVector * thrust, ForceMode.Force);
+            oldVelocity = rigid.velocity;
+            thrustActive = true;
+            thrustVector = leftVector * thrust;
+            thrustTime = thrustDuration;
         }
         if (Input.GetKeyDown(KeyCode.RightArrow) && rightUses > 0) {
             rightUses--;
-            this.gameObject.GetComponent<Rigidbody>().AddRelativeForce(rightVector * thrust, ForceMode.Force);
+            oldVelocity = rigid.velocity;
+            thrustActive = true;
+            thrustVector = rightVector * thrust;
+            thrustTime = thrustDuration;
         }
     }
 
     void FixedUpdate() {
+        if (resetVelocity) {
+            resetVelocity = false;
+            rigid.velocity = oldVelocity;
+        }
 
+        if (thrustActive && thrustTime > 0) {
+            rigid.AddRelativeForce(thrustVector, ForceMode.VelocityChange);
+            thrustTime -= Time.timeScale;
+            if (thrustTime <= 0) {
+                thrustActive = false;
+                resetVelocity = true;
+            }
+        }
     }
 }

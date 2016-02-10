@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class GravityMotion : MonoBehaviour {
 	
-	private Rigidbody rigid;
+	public Rigidbody rigid;
 	public PlanetScript[] attractors;
 	public Vector3 lastAppliedForce; // for debug
 	public LineRenderer lr;
@@ -12,6 +12,7 @@ public class GravityMotion : MonoBehaviour {
 	void Start() {
 		rigid = GetComponent<Rigidbody>();
 		if (rigid == null) print("Error! No Rigidbody component found");
+		attractors = FindObjectsOfType<PlanetScript>();
 	}
 
 	void FixedUpdate() {

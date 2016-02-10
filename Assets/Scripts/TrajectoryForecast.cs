@@ -32,7 +32,7 @@ public class TrajectoryForecast : MonoBehaviour {
 			Vector3 cumulativeForce = Vector3.zero;
 			foreach (PlanetScript ps in gm.attractors) {
 				if (ps.disableForce) continue;
-				cumulativeForce += GravityMotion.gravity(ps, pos);
+				cumulativeForce += gm.gravity(ps, pos);
 			}
 			Vector3 nextPos = pos;
 			vel += cumulativeForce / gm.rigid.mass * granularity;

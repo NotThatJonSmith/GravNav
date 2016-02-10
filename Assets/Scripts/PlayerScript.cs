@@ -14,7 +14,6 @@ public class PlayerScript : MonoBehaviour {
 	void Start() {
 		rigid = GetComponent<Rigidbody>();
 		if (rigid == null) print("Error: No RigidBody on Player!");
-		
 	}
 	
 	void Awake() {

@@ -6,6 +6,8 @@ public class GravityMotion : MonoBehaviour {
 	
 	public Rigidbody rigid;
 	public PlanetScript[] attractors;
+	public int power = 1;
+	public int multiplier = 1;
 
 	void Start() {
 		rigid = GetComponent<Rigidbody>();
@@ -20,8 +22,8 @@ public class GravityMotion : MonoBehaviour {
 		}
 	}
 
-	public static Vector3 gravity(PlanetScript ps, Vector3 pos) {
+	public Vector3 gravity(PlanetScript ps, Vector3 pos) {
 		Vector3 displacement = ps.gameObject.transform.position - pos;
-		return displacement.normalized * ps.strengthOfAttraction / displacement.magnitude;
+		return multiplier * displacement.normalized * ps.strengthOfAttraction / Mathf.Pow(displacement.magnitude, power);
 	}
 }

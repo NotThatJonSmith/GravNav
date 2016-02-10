@@ -6,8 +6,6 @@ public class GravityMotion : MonoBehaviour {
 	
 	public Rigidbody rigid;
 	public PlanetScript[] attractors;
-	public Vector3 lastAppliedForce; // for debug
-	public LineRenderer lr;
 
 	void Start() {
 		rigid = GetComponent<Rigidbody>();
@@ -18,15 +16,9 @@ public class GravityMotion : MonoBehaviour {
 	void FixedUpdate() {
 		foreach (PlanetScript ps in attractors) {
 			if (ps.disableForce) continue;
-			lastAppliedForce = gravity(ps, transform.position);
-			rigid.AddForce(lastAppliedForce);
+			rigid.AddForce(gravity(ps, transform.position));
 		}
 	}
-
-	void OnCollisionEnter(Collision coll) {
-		Destroy(gameObject);
-	}
-
 
 	public static Vector3 gravity(PlanetScript ps, Vector3 pos) {
 		Vector3 displacement = ps.gameObject.transform.position - pos;

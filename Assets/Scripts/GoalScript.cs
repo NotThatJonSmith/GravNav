@@ -62,6 +62,7 @@ public class GoalScript : MonoBehaviour {
 
     // Throw whatever is related to win state here
     void winState() {
+		PlayerScript.S.win ();
 		winScreen.SetActive(true);
 	}
 

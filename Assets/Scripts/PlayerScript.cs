@@ -38,6 +38,10 @@ public class PlayerScript : MonoBehaviour {
 			transform.rotation = Quaternion.LookRotation(Vector3.forward, rigid.velocity.normalized);
 		}	
     }
+
+	void Update() {
+		if (Input.GetKeyDown(KeyCode.A)) slowTime(2f);
+	}
 	
     void OnCollisionEnter(Collision coll){
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);
@@ -75,5 +79,14 @@ public class PlayerScript : MonoBehaviour {
 
     public void win() {
 		gameObject.SetActive(false);
+	}
+
+	public void slowTime(float timeOfEffect) {
+		Invoke("resetTime",timeOfEffect);
+		Time.timeScale = .5f;
+	}
+	
+	public void resetTime() {
+		Time.timeScale = 1f;
 	}
 }

@@ -11,7 +11,7 @@ public class PlayerScript : MonoBehaviour {
     public GameObject oobCanvas;
     public int oobTimeLimit = 5;
     private float exitTime = 0;
-    public int oobTimeInt = 5;
+    public int oobTimeLeftInt = 5;
 
     public static PlayerScript S;
 	private Rigidbody rigid;
@@ -67,7 +67,7 @@ public class PlayerScript : MonoBehaviour {
             }
             else if (Time.time - exitTime <= oobTimeLimit)
             {
-                oobTimeInt = oobTimeLimit - Mathf.FloorToInt(Time.time - exitTime);
+                oobTimeLeftInt = oobTimeLimit - Mathf.FloorToInt(Time.time - exitTime);
             }
             else
             {
@@ -80,7 +80,7 @@ public class PlayerScript : MonoBehaviour {
         {
             Destroy(oobCanvas);
             exitTime = 0;
-            oobTimeInt = oobTimeLimit;
+            oobTimeLeftInt = oobTimeLimit;
         }
     }
 

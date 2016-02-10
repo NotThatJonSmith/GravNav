@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Parallax : MonoBehaviour {
     public GameObject       poi; //The player ship
-    public GameObject[]     panels; //The scrolling foregrounds
+    public List<GameObject> panels; //The scrolling foregrounds
+    public GameObject       parallaxPrefab;
     public float            scrollSpeed = -30f;
     //motionMult controls how much panels react to player movement
     public float            motionMult = 0.1f;
@@ -14,6 +16,12 @@ public class Parallax : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        poi = PlayerScript.S.gameObject;
+        panels.Add(Instantiate(parallaxPrefab).transform.FindChild("StarfieldFG_0").gameObject);
+        if (!panels[0])
+        {
+            Debug.Log("Parallax not loading.");
+        }
         depth = panels[0].transform.position.z;
 
         //Set initial positions of panels

@@ -13,7 +13,7 @@ public class oobIntTextScript : MonoBehaviour {
 	void Update () {
         if (PlayerScript.S)
         {
-            GetComponent<Text>().text = PlayerScript.S.gameObject.GetComponent<PlayerScript>().oobTimeInt.ToString();
+            GetComponent<Text>().text = PlayerScript.S.gameObject.GetComponent<PlayerScript>().oobTimeLeftInt.ToString();
         }
 	}
 }

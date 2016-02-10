@@ -38,10 +38,6 @@ public class PlayerScript : MonoBehaviour {
 			transform.rotation = Quaternion.LookRotation(Vector3.forward, rigid.velocity.normalized);
 		}	
     }
-
-	void Update() {
-		if (Input.GetKeyDown(KeyCode.A)) slowTime(2f);
-	}
 	
     void OnCollisionEnter(Collision coll){
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);
@@ -50,6 +46,12 @@ public class PlayerScript : MonoBehaviour {
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            slowTime(2f);
+        }
+
+
         if (transform.position.x > horzExtent ||
             transform.position.x < -horzExtent ||
             transform.position.y > vertExtent ||

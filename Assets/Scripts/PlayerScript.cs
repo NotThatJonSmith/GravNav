@@ -6,9 +6,12 @@ using UnityEngine.SceneManagement;
 public class PlayerScript : MonoBehaviour {
 
     public GameObject explosionPrefab;
-    public int oobTime = 5;
+    public GameObject oobCanvasPrefab;
+
+    public GameObject oobCanvas;
+    public int oobTimeLimit = 5;
     private float exitTime = 0;
-    public int outsideTimeInt = 0;
+    public int oobTimeInt = 5;
 
     public static PlayerScript S;
 	private Rigidbody rigid;
@@ -60,22 +63,24 @@ public class PlayerScript : MonoBehaviour {
             if (exitTime == 0)
             {
                 exitTime = Time.time;
+                oobCanvas = Instantiate(oobCanvasPrefab) as GameObject;
             }
-            else if (Time.time - exitTime <= oobTime)
+            else if (Time.time - exitTime <= oobTimeLimit)
             {
-                outsideTimeInt = oobTime - Mathf.FloorToInt(Time.time - exitTime);
+                oobTimeInt = oobTimeLimit - Mathf.FloorToInt(Time.time - exitTime);
             }
             else
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
-        } else if(transform.position.x > horzExtent &&
+        } else if(transform.position.x < horzExtent &&
             transform.position.x > -horzExtent &&
             transform.position.y < vertExtent &&
             transform.position.y > -vertExtent)
         {
+            Destroy(oobCanvas);
             exitTime = 0;
-            outsideTimeInt = oobTime;
+            oobTimeInt = oobTimeLimit;
         }
     }
 

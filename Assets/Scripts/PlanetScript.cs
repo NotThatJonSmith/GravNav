@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class PlanetScript : MonoBehaviour {
-	
+
 	public float strengthOfAttraction = 0;
 	public bool _disableForce = false;
 	public Material[] mats;
@@ -34,6 +34,9 @@ public class PlanetScript : MonoBehaviour {
 
 	void OnMouseDown() {
 		disableForce = !disableForce;
+        if (!disableForce) {
+            ClickCounter.instance.clickCount++;
+        }
 	}
 
 

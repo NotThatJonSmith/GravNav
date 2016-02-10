@@ -27,12 +27,15 @@ public class GoalScript : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-        if (PlayerScript.S.GetComponent<PlayerScript>().pickups == PlayerScript.S.GetComponent<PlayerScript>().pickupsNeeded)
+        if (PlayerScript.S)
         {
-            goalSpriteRenderer.GetComponent<SpriteRenderer>().color = new Color(0, 1, 0);
-            if (win)
+            if (PlayerScript.S.GetComponent<PlayerScript>().pickups == PlayerScript.S.GetComponent<PlayerScript>().pickupsNeeded)
             {
-                winState();
+                goalSpriteRenderer.GetComponent<SpriteRenderer>().color = new Color(0, 1, 0);
+                if (win)
+                {
+                    winState();
+                }
             }
         }
 	}
@@ -59,6 +62,7 @@ public class GoalScript : MonoBehaviour {
 
     // Throw whatever is related to win state here
     void winState() {
+		PlayerScript.S.win ();
 		winScreen.SetActive(true);
 	}
 

@@ -10,12 +10,10 @@ public class Parallax : MonoBehaviour {
     public float            screenWidth = 120;
     public float            screenHeight = 120;
 
-    private float           panelHt; //Height of the panel
     private float           depth; //Depth of panels (pos.z)
 
 	// Use this for initialization
 	void Start () {
-        panelHt = panels[0].transform.localScale.y;
         depth = panels[0].transform.position.z;
 
         //Set initial positions of panels

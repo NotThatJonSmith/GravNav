@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class PlayerScript : MonoBehaviour {
 
+    public GameObject explosionPrefab;
+
     public static PlayerScript S;
 	private Rigidbody rigid;
     public int pickups = 0;
@@ -33,10 +35,11 @@ public class PlayerScript : MonoBehaviour {
 	}
 	
     void OnCollisionEnter(Collision coll){
-        Debug.Log("CONTACT.");
+        Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+        Destroy(gameObject);
     }
 
-	public void win() {
+    public void win() {
 		gameObject.SetActive(false);
 	}
 

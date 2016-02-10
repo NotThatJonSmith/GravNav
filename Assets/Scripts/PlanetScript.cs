@@ -7,6 +7,7 @@ public class PlanetScript : MonoBehaviour {
 	public bool _disableForce = false;
 	public Material[] mats;
 	public Renderer rend;
+	public bool isClickable = true;
 
 	void Awake() {
 		rend = GetComponent<Renderer>();
@@ -33,6 +34,7 @@ public class PlanetScript : MonoBehaviour {
 	}
 
 	void OnMouseDown() {
+		if (!isClickable) return;
 		disableForce = !disableForce;
         if (!disableForce) {
             ClickCounter.instance.clickCount++;

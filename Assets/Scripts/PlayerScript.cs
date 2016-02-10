@@ -59,6 +59,10 @@ public class PlayerScript : MonoBehaviour {
 		Gizmos.DrawLine(transform.position, transform.position + 4 * lastAppliedForce);
 	}
 
+	public void win() {
+		Destroy(gameObject);
+	}
+
 	private float forecastTime = 4.0f;
 	private float deadZoneRadius = 2f;
 	private float granularity = 0.1f;
@@ -82,7 +86,7 @@ public class PlayerScript : MonoBehaviour {
 				if (ps.disableForce) continue;
 				if ((ps.gameObject.transform.position - nextPos).magnitude < deadZoneRadius) return;
 			}
-			Debug.DrawLine(pos, nextPos, Color.red);
+			//Debug.DrawLine(pos, nextPos, Color.red);
 			pos = nextPos;
 			points[i + 1] = pos;
 

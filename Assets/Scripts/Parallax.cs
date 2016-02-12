@@ -30,6 +30,10 @@ public class Parallax : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if(Time.timeScale == 0)
+        {
+            return;
+        }
         float dY = 0, dX = 0;
 
         if (poi != null) {

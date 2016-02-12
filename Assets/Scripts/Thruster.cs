@@ -29,33 +29,17 @@ public class Thruster : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (Input.GetKeyDown(KeyCode.UpArrow) && upUses > 0) {
-            upUses--;
-            oldVelocity = rigid.velocity;
-            thrustActive = true;
-            thrustVector = upVector * thrust;
-            thrustTime = thrustDuration;
+        if (Input.GetKeyDown(KeyCode.UpArrow)) {
+			upBoost ();
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow) && downUses > 0) {
-            downUses--;
-            oldVelocity = rigid.velocity;
-            thrustActive = true;
-            thrustVector = downVector * thrust;
-            thrustTime = thrustDuration;
+        if (Input.GetKeyDown(KeyCode.DownArrow)) {
+			downBoost ();
         }
-        if (Input.GetKeyDown(KeyCode.LeftArrow) && leftUses > 0) {
-            leftUses--;
-            oldVelocity = rigid.velocity;
-            thrustActive = true;
-            thrustVector = leftVector * thrust;
-            thrustTime = thrustDuration;
+        if (Input.GetKeyDown(KeyCode.LeftArrow)) {
+			leftBoost ();
         }
-        if (Input.GetKeyDown(KeyCode.RightArrow) && rightUses > 0) {
-            rightUses--;
-            oldVelocity = rigid.velocity;
-            thrustActive = true;
-            thrustVector = rightVector * thrust;
-            thrustTime = thrustDuration;
+        if (Input.GetKeyDown(KeyCode.RightArrow)) {
+			rightBoost ();
         }
     }
 
@@ -74,4 +58,44 @@ public class Thruster : MonoBehaviour {
             }
         }
     }
+
+	public void upBoost() {
+		if (upUses > 0) {
+			upUses--;
+			oldVelocity = rigid.velocity;
+			thrustActive = true;
+			thrustVector = upVector * thrust;
+			thrustTime = thrustDuration;
+		}
+	}
+
+	public void downBoost() {
+		if (downUses > 0) {
+			downUses--;
+			oldVelocity = rigid.velocity;
+			thrustActive = true;
+			thrustVector = downVector * thrust;
+			thrustTime = thrustDuration;
+		}
+	}
+
+	public void leftBoost() {
+		if (leftUses > 0) {
+			leftUses--;
+			oldVelocity = rigid.velocity;
+			thrustActive = true;
+			thrustVector = leftVector * thrust;
+			thrustTime = thrustDuration;
+		}
+	}
+
+	public void rightBoost() {
+		if (rightUses > 0) {
+			rightUses--;
+			oldVelocity = rigid.velocity;
+			thrustActive = true;
+			thrustVector = rightVector * thrust;
+			thrustTime = thrustDuration;
+		}
+	}
 }

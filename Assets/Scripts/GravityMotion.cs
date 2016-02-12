@@ -28,6 +28,7 @@ public class GravityMotion : MonoBehaviour {
 
 	public Vector3 gravity(PlanetScript ps, Vector3 pos) {
 		Vector3 displacement = ps.gameObject.transform.position - pos;
-		return multiplier * displacement.normalized * ps.strengthOfAttraction / Mathf.Pow(displacement.magnitude, power);
+		float dist = Mathf.Max(5f,displacement.magnitude);
+		return multiplier * displacement.normalized * ps.strengthOfAttraction / Mathf.Pow(dist, power);
 	}
 }

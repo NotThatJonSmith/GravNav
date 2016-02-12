@@ -21,9 +21,14 @@ public class PlayerScript : MonoBehaviour {
     private float vertExtent;
     private float horzExtent;
 
+    private float birthTime;
+    public Vector3 startScale = Vector3.zero;
+    public Vector3 endScale = Vector3.one;
+
     void Start() {
         vertExtent = Camera.main.orthographicSize;
         horzExtent = vertExtent * Screen.width / Screen.height;
+        birthTime = Time.time;
         rigid = GetComponent<Rigidbody>();
 		if (rigid == null) print("Error: No RigidBody on Player!");
 	}
@@ -54,6 +59,15 @@ public class PlayerScript : MonoBehaviour {
             slowTime(2f);
         }
 
+        if (Time.time - birthTime < 1)
+        {
+            float u = (Time.time - birthTime) % 1.0f;
+            transform.localScale = (1 - u) * startScale + u * endScale;
+        }
+        else
+        { 
+            transform.localScale = Vector3.one;
+        }
 
         if (transform.position.x > horzExtent ||
             transform.position.x < -horzExtent ||

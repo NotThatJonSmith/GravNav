@@ -18,7 +18,7 @@ public class tutTriggerScript : MonoBehaviour {
 	void OnTriggerEnter(Collider other)
 	{
 		// Can only be triggered once
-		if (!beenTriggered) {
+		if (!beenTriggered && other.tag == "Player") {
 			textObject.GetComponent<Text> ().text = textValue;
 			tutorialObject.GetComponent<TutorialScript> ().showTutorial ();
 			beenTriggered = true;

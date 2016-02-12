@@ -9,7 +9,6 @@ public class ParticleFieldController : MonoBehaviour {
 
 	void Start() {
 		particles = new GameObject[particleCount];
-		transform.position = Vector3.zero;
 	}
 
 	void Update() {

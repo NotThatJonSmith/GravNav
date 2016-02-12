@@ -15,11 +15,15 @@ public class GravityMotion : MonoBehaviour {
 		attractors = FindObjectsOfType<PlanetScript>();
 	}
 
+	public bool isFloating;
 	void FixedUpdate() {
+		bool isFloatingTemp = true;
 		foreach (PlanetScript ps in attractors) {
 			if (ps.disableForce) continue;
 			rigid.AddForce(gravity(ps, transform.position));
+			isFloatingTemp = false;
 		}
+		isFloating = isFloatingTemp;
 	}
 
 	public Vector3 gravity(PlanetScript ps, Vector3 pos) {

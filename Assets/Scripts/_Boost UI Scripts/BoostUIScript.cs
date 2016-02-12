@@ -21,6 +21,8 @@ public class BoostUIScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		updateButtons ();
+		if (player.active == false)
+			boostCanvas.enabled = false;
 	}
 
 	// i cant believe how ugly this is lol

@@ -4,7 +4,7 @@ using System.Collections;
 public class PlanetScript : MonoBehaviour {
 
 	public float strengthOfAttraction = 0;
-	public bool _disableForce = false;
+	public bool _disableForce = true;
 	public Material[] mats;
 	public Renderer rend;
 
@@ -13,11 +13,11 @@ public class PlanetScript : MonoBehaviour {
 	}
 
 	void setMaterial() {
+		if (mats.Length < 2) return;
 		rend.sharedMaterial = mats[disableForce?0:1];
 	}
 
 	void Start() {
-		disableForce = true;
 		setMaterial();
 	}
 

@@ -22,6 +22,7 @@ public class PlayerScript : MonoBehaviour {
     private float horzExtent;
 
     private float birthTime;
+    public bool scaleState;
     public Vector3 startScale = Vector3.zero;
     public Vector3 endScale = Vector3.one;
 
@@ -30,6 +31,7 @@ public class PlayerScript : MonoBehaviour {
         horzExtent = vertExtent * Screen.width / Screen.height;
         birthTime = Time.time;
         rigid = GetComponent<Rigidbody>();
+        scaleState = true;
 		if (rigid == null) print("Error: No RigidBody on Player!");
 	}
 	
@@ -64,9 +66,11 @@ public class PlayerScript : MonoBehaviour {
             float u = (Time.time - birthTime) % 1.0f;
             transform.localScale = (1 - u) * startScale + u * endScale;
         }
-        else
+        else if (scaleState)
         { 
             transform.localScale = Vector3.one;
+            scaleState = false;
+            GetComponent<SphereCollider>().enabled = true;
         }
 
         if (transform.position.x > horzExtent ||

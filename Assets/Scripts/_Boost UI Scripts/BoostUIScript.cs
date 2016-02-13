@@ -27,9 +27,12 @@ public class BoostUIScript : MonoBehaviour {
 
 	// i cant believe how ugly this is lol
 	void updateButtons() {
-		boostButtons [(int)buttonIndex.up].GetComponent<BoostButtonScript>().updateNumValue(player.GetComponent<Thruster> ().upUses);
-		boostButtons [(int)buttonIndex.down].GetComponent<BoostButtonScript>().updateNumValue(player.GetComponent<Thruster> ().downUses);
-		boostButtons [(int)buttonIndex.left].GetComponent<BoostButtonScript>().updateNumValue(player.GetComponent<Thruster> ().leftUses);
-		boostButtons [(int)buttonIndex.right].GetComponent<BoostButtonScript>().updateNumValue(player.GetComponent<Thruster> ().rightUses);
+        if (PlayerScript.S)
+        {
+            boostButtons[(int)buttonIndex.up].GetComponent<BoostButtonScript>().updateNumValue(player.GetComponent<Thruster>().upUses);
+            boostButtons[(int)buttonIndex.down].GetComponent<BoostButtonScript>().updateNumValue(player.GetComponent<Thruster>().downUses);
+            boostButtons[(int)buttonIndex.left].GetComponent<BoostButtonScript>().updateNumValue(player.GetComponent<Thruster>().leftUses);
+            boostButtons[(int)buttonIndex.right].GetComponent<BoostButtonScript>().updateNumValue(player.GetComponent<Thruster>().rightUses);
+        }
 	}
 }

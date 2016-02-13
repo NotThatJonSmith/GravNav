@@ -64,6 +64,7 @@ public class GoalScript : MonoBehaviour {
     void winState() {
 		PlayerScript.S.win ();
 		winScreen.SetActive(true);
+        winScreen.GetComponentInChildren<WinTextScript>().setText();
 	}
 
 	bool isInCircle (Vector3 objPos) {

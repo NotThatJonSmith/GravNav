@@ -8,19 +8,20 @@ public class TeleportObject : MonoBehaviour {
 
     private TeleportMaster tpM;
 
-	// Use this for initialization
-	void Start () {
+
+    // Use this for initialization
+    void Start () {
         tpM = this.gameObject.transform.parent.GetComponent<TeleportMaster>();
         incoming = false;
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
-	
 	}
 
     void OnTriggerEnter(Collider coll) {
         if (coll.gameObject.GetComponent<PlayerScript>() && !tpM.teleported) {
+            coll.gameObject.GetComponent<ParticleSystem>().Play();
             coll.gameObject.transform.position = teleportTo.transform.position;
             teleportTo.GetComponent<TeleportObject>().incoming = true;
             tpM.teleported = true;

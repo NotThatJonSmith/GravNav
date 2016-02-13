@@ -16,6 +16,7 @@ public class Thruster : MonoBehaviour {
 
     private Vector3 oldVelocity;
     private Rigidbody rigid;
+    private SphereCollider coll;
     private Vector3 thrustVector;
     private float thrustTime;
     private bool resetVelocity;
@@ -23,6 +24,7 @@ public class Thruster : MonoBehaviour {
     // Use this for initialization
     void Start() {
         rigid = this.gameObject.GetComponent<Rigidbody>();
+        coll = this.gameObject.GetComponent<SphereCollider>();
         thrustActive = false;
         resetVelocity = false;
     }
@@ -55,12 +57,14 @@ public class Thruster : MonoBehaviour {
             if (thrustTime <= 0) {
                 thrustActive = false;
                 resetVelocity = true;
+                coll.enabled = true;
             }
         }
     }
 
 	public void upBoost() {
 		if (upUses > 0) {
+            coll.enabled = false;
 			upUses--;
 			oldVelocity = rigid.velocity;
 			thrustActive = true;
@@ -71,7 +75,8 @@ public class Thruster : MonoBehaviour {
 
 	public void downBoost() {
 		if (downUses > 0) {
-			downUses--;
+            coll.enabled = false;
+            downUses--;
 			oldVelocity = rigid.velocity;
 			thrustActive = true;
 			thrustVector = downVector * thrust;
@@ -81,7 +86,8 @@ public class Thruster : MonoBehaviour {
 
 	public void leftBoost() {
 		if (leftUses > 0) {
-			leftUses--;
+            coll.enabled = false;
+            leftUses--;
 			oldVelocity = rigid.velocity;
 			thrustActive = true;
 			thrustVector = leftVector * thrust;
@@ -91,7 +97,8 @@ public class Thruster : MonoBehaviour {
 
 	public void rightBoost() {
 		if (rightUses > 0) {
-			rightUses--;
+            coll.enabled = false;
+            rightUses--;
 			oldVelocity = rigid.velocity;
 			thrustActive = true;
 			thrustVector = rightVector * thrust;

@@ -20,8 +20,11 @@ public class PickupScript : MonoBehaviour {
     {
         if(coll.tag == "Player")
         {
+			GetComponent<MeshRenderer> ().enabled = false;
+			GetComponent<BoxCollider> ().enabled = false;
+			GetComponent<AudioSource> ().Play ();
             PlayerScript.S.GetComponent<PlayerScript>().pickups += 1;
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 }

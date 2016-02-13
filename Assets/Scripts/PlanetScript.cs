@@ -21,6 +21,18 @@ public class PlanetScript : MonoBehaviour {
 		setMaterial();
 	}
 
+    void Update()
+    {
+        if (disableForce)
+        {
+            transform.GetChild(0).transform.FindChild("Mouth").transform.localScale = new Vector3(1, .1f, 1);
+        }
+        else
+        {
+            transform.GetChild(0).transform.FindChild("Mouth").transform.localScale = new Vector3(1, 1, 1);
+        }
+    }
+
 	public bool disableForce {
 		get {
 			return _disableForce;

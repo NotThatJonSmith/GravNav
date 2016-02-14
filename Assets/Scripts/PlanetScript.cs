@@ -40,14 +40,13 @@ public class PlanetScript : MonoBehaviour {
 
     void Update()
     {
-        if (disableForce)
-        {
-            transform.GetChild(0).transform.FindChild("Mouth").transform.localScale = new Vector3(1, .1f, 1);
+        if (!disableForce) {
+            float u = Time.time % 1.0f;
+            u = Mathf.Sin(2 * Mathf.PI * u);
+            float scale = (1 - u) * 0.9f + u * 1.0f;
+            transform.GetChild(0).transform.FindChild("Mouth").transform.localScale = new Vector3(1, scale, 1);
         }
-        else
-        {
-            transform.GetChild(0).transform.FindChild("Mouth").transform.localScale = new Vector3(1, 1, 1);
-        }
+
         if (S) {
             Vector3 leftVector = S.transform.position - leftPupilCenter.position;
             Vector3 rightVector = S.transform.position - rightPupilCenter.position;
@@ -117,8 +116,11 @@ public class PlanetScript : MonoBehaviour {
 		disableForce = !disableForce;
         if (!disableForce) {
             ClickCounter.instance.clickCount++;
+            transform.GetChild(0).transform.FindChild("Mouth").transform.localScale = new Vector3(1, 1, 1);
+        } else {
+            transform.GetChild(0).transform.FindChild("Mouth").transform.localScale = new Vector3(1, .1f, 1);
         }
-	}
+    }
 
 	void touchOn() {
 		disableForce = false;

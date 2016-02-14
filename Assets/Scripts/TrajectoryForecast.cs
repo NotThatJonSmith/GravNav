@@ -39,7 +39,7 @@ public class TrajectoryForecast : MonoBehaviour {
 			nextPos += vel * granularity;
 			foreach (PlanetScript ps in gm.attractors) {
 				if (ps.disableForce) continue;
-				if ((ps.gameObject.transform.position - nextPos).magnitude < deadZoneRadius) return;
+				if ((ps.gameObject.transform.position - nextPos).magnitude < deadZoneRadius) break;
 			}
 			//Debug.DrawLine(pos, nextPos, Color.red);
 			pos = nextPos;

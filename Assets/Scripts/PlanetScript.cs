@@ -4,6 +4,7 @@ using System.Collections;
 public class PlanetScript : MonoBehaviour {
 
 	public float strengthOfAttraction = 0;
+	public bool disableControls = false;
 	public bool _disableForce = true;
 	public Material[] mats;
 	public Renderer rend;
@@ -53,7 +54,7 @@ public class PlanetScript : MonoBehaviour {
         }
 
 		int iter = 0;
-
+		if (disableControls) return;
 		foreach (Touch touch in Input.touches) {
 			//http://stackoverflow.com/questions/21409573/how-to-detect-touch-on-a-game-object
 			Ray ray = Camera.main.ScreenPointToRay( Input.GetTouch(iter).position );
@@ -85,6 +86,7 @@ public class PlanetScript : MonoBehaviour {
 	}
 
 	void OnMouseDown() {
+		if (disableControls) return;
 		disableForce = !disableForce;
         if (!disableForce) {
             ClickCounter.instance.clickCount++;

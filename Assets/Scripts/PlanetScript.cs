@@ -8,6 +8,8 @@ public class PlanetScript : MonoBehaviour {
 	public Material[] mats;
 	public Renderer rend;
 
+	Touch currentTouch;
+
     private PlayerScript S;
     private Transform leftPupilCenter, rightPupilCenter, leftPupil, rightPupil;
 
@@ -21,6 +23,8 @@ public class PlanetScript : MonoBehaviour {
 	}
 
 	void Start() {
+		currentTouch = new Touch();
+
 		setMaterial();
         S = PlayerScript.S;
         leftPupilCenter = this.gameObject.transform.Find("Face/Left Eye/PupilCenter");
@@ -52,6 +56,50 @@ public class PlanetScript : MonoBehaviour {
             leftPupilCenter.rotation = Quaternion.AngleAxis(leftAngle, Vector3.forward);
             rightPupilCenter.rotation = Quaternion.AngleAxis(rightAngle, Vector3.forward);
         }
+
+		int iter = 0;
+
+		foreach (Touch touch in Input.touches) {
+			//http://stackoverflow.com/questions/21409573/how-to-detect-touch-on-a-game-object
+			Ray ray = Camera.main.ScreenPointToRay( Input.GetTouch(iter).position );
+			RaycastHit hit;
+
+			iter++;
+
+			if (touch.phase != TouchPhase.Ended && touch.phase != TouchPhase.Canceled) {
+				if (Physics.Raycast (ray, out hit) && hit.transform.gameObject == this.gameObject) {
+					if (disableForce) {
+						touchOn ();
+						//currentTouch = touch;
+					}
+				}
+			} else {
+				touchOff ();
+			}
+		}
+
+		/*
+		Ray curTouchRay = Camera.main.ScreenPointToRay (currentTouch.position);
+		RaycastHit curTouchHit;
+		if (Physics.Raycast (curTouchRay, out curTouchHit) 
+			&& (curTouchHit.transform.gameObject != this.gameObject)) {
+			touchOff ();
+		}
+		*/
+		/*
+		//http://stackoverflow.com/questions/21409573/how-to-detect-touch-on-a-game-object
+		if (Input.touchCount > 0 && Input.GetTouch (0).phase == TouchPhase.Began) {
+			Ray ray = Camera.main.ScreenPointToRay (Input.GetTouch (0).position);
+			RaycastHit hit;
+
+			if (Physics.Raycast (ray, out hit) && hit.transform.gameObject == this.gameObject) {
+				touchOn ();
+			}
+			else {
+				touchOff ();
+			}
+		}
+		*/
     }
 
     public bool disableForce {
@@ -72,7 +120,12 @@ public class PlanetScript : MonoBehaviour {
         }
 	}
 
+	void touchOn() {
+		disableForce = false;
+		ClickCounter.instance.clickCount++;
+	}
 
-
-
+	void touchOff() {
+		disableForce = true;
+	}
 }

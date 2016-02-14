@@ -11,4 +11,8 @@ public class EndScreenScript : MonoBehaviour {
 	public void nextLevel() {
 		SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex + 1);
 	}
+
+	public void levelSelect() {
+		SceneManager.LoadScene ("level_select");
+	}
 }

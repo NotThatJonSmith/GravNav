@@ -33,7 +33,7 @@ public class GenLevelSelect : MonoBehaviour {
 			txt.text = i.ToString();
 			lt_script.sceneIdx = i;
 			if (tilesThisRow == tilesPerRow) {
-				tilesThisRow = 0;
+				tilesThisRow = 1;
 				pos.y -= 40;
 				pos.x = anchor.x;
 			} else {

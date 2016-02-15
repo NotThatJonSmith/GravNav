@@ -12,6 +12,7 @@ public class GenLevelSelect : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		Time.timeScale = 1f;
 		int tilesThisRow = 1;
 		Vector3 anchor = new Vector3(Screen.width / 2 - (tilesPerRow-1) * tileOffset/2,
 									 Screen.height - vertOffset,

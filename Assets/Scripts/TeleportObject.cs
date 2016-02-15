@@ -25,6 +25,7 @@ public class TeleportObject : MonoBehaviour {
             coll.gameObject.transform.position = teleportTo.transform.position;
             teleportTo.GetComponent<TeleportObject>().incoming = true;
             tpM.teleported = true;
+			GetComponent<AudioSource> ().Play ();
         }
     }
 

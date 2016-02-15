@@ -1,17 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SpawnBoostUI : MonoBehaviour {
+public class SpawnUIStuff : MonoBehaviour {
 
 	public GameObject boostUI;
+	public GameObject pauseUI;
 
 	// Use this for initialization
 	void Start () {
 		Instantiate (boostUI);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+		Instantiate (pauseUI);
 	}
 }

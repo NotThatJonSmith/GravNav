@@ -20,7 +20,7 @@ public class GenLevelSelect : MonoBehaviour {
 		Vector3 pos = anchor;
 		print(SceneManager.sceneCountInBuildSettings);
 		// Requires that the level select scene is build index 0!
-		for (int i = 1; i < SceneManager.sceneCountInBuildSettings; i++) {
+		for (int i = 2; i < SceneManager.sceneCountInBuildSettings; i++) {
 			GameObject lt = Instantiate(levelTilePrefab) as GameObject;
 			lt.transform.SetParent(transform, true);
 			RectTransform rt = lt.GetComponent<RectTransform>();
@@ -31,7 +31,7 @@ public class GenLevelSelect : MonoBehaviour {
 			if (lt_script == null) print("no leveltile script in the tile prefab");
 
 			rt.position = pos;
-			txt.text = i.ToString();
+			txt.text = (i-1).ToString();
 			lt_script.sceneIdx = i;
 			if (tilesThisRow == tilesPerRow) {
 				tilesThisRow = 1;

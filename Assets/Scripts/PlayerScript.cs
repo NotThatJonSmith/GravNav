@@ -73,6 +73,7 @@ public class PlayerScript : MonoBehaviour {
             GetComponent<SphereCollider>().enabled = true;
         }
 
+        //OOB CHECKS
         if (transform.position.x > horzExtent ||
             transform.position.x < -horzExtent ||
             transform.position.y > vertExtent ||
@@ -104,9 +105,10 @@ public class PlayerScript : MonoBehaviour {
 
     public void win() {
 		gameObject.SetActive(false);
-	}
+        Destroy(oobCanvas);
+    }
 
-	public void slowTime(float timeOfEffect) {
+    public void slowTime(float timeOfEffect) {
 		Invoke("resetTime",timeOfEffect);
 		Time.timeScale = .5f;
 	}

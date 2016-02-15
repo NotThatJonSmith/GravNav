@@ -16,7 +16,7 @@ public class PauseScript : MonoBehaviour {
 	}
 
 	void Update() {
-		if (!PlayerScript.S.gameObject.active)
+		if (PlayerScript.S && !PlayerScript.S.gameObject.active)
 			pauseCanvas.enabled = false;
 	}
 

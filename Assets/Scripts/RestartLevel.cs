@@ -15,5 +15,9 @@ public class RestartLevel : MonoBehaviour {
 	    if (Input.GetKeyDown(resetKey)) {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
+
+		if (Input.GetKeyDown(KeyCode.Escape)) {
+			SceneManager.LoadScene(0);
+		}
 	}
 }

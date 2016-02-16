@@ -20,9 +20,7 @@ public class playerSoundScript : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		print (playerRigidbody.velocity.magnitude);
 		if (playerRigidbody.velocity.magnitude <= maxSpeedForMaxPitch) {
-			//playerAS.pitch = (playerRigidbody.velocity.magnitude / maxSpeedForMaxPitch) * 3f;
 			playerAS.pitch = 0.5f * (1f - playerRigidbody.velocity.magnitude/maxSpeedForMaxPitch) +
 							 3.0f * (playerRigidbody.velocity.magnitude/maxSpeedForMaxPitch);
 		} 

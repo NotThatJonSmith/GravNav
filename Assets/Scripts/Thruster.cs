@@ -21,6 +21,8 @@ public class Thruster : MonoBehaviour {
     private float thrustTime;
     private bool resetVelocity;
 
+	public GameObject thrusterSound;
+
     // Use this for initialization
     void Start() {
         rigid = this.gameObject.GetComponent<Rigidbody>();
@@ -74,6 +76,7 @@ public class Thruster : MonoBehaviour {
 			thrustActive = true;
 			thrustVector = upVector * thrust;
 			thrustTime = thrustDuration;
+			thrusterSound.GetComponent<AudioSource> ().Play ();
 		}
 	}
 
@@ -85,6 +88,7 @@ public class Thruster : MonoBehaviour {
 			thrustActive = true;
 			thrustVector = downVector * thrust;
 			thrustTime = thrustDuration;
+			thrusterSound.GetComponent<AudioSource> ().Play ();
 		}
 	}
 
@@ -96,6 +100,7 @@ public class Thruster : MonoBehaviour {
 			thrustActive = true;
 			thrustVector = leftVector * thrust;
 			thrustTime = thrustDuration;
+			thrusterSound.GetComponent<AudioSource> ().Play ();
 		}
 	}
 
@@ -107,6 +112,7 @@ public class Thruster : MonoBehaviour {
 			thrustActive = true;
 			thrustVector = rightVector * thrust;
 			thrustTime = thrustDuration;
+			thrusterSound.GetComponent<AudioSource> ().Play ();
 		}
 	}
 }

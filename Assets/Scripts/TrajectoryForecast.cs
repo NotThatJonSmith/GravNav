@@ -37,11 +37,6 @@ public class TrajectoryForecast : MonoBehaviour {
 			Vector3 nextPos = pos;
 			vel += cumulativeForce / gm.rigid.mass * granularity;
 			nextPos += vel * granularity;
-			foreach (PlanetScript ps in gm.attractors) {
-				if (ps.disableForce) continue;
-				if ((ps.gameObject.transform.position - nextPos).magnitude < deadZoneRadius) break;
-			}
-			//Debug.DrawLine(pos, nextPos, Color.red);
 			pos = nextPos;
 			points[i + 1] = pos;
 		}

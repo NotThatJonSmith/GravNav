@@ -27,7 +27,11 @@ public class TutorialScript : MonoBehaviour {
 		// If tutorial is enabled >_>
 		if (tutorialCanvas.enabled == true) {
 			// Disable if mouse click anywhere
-			if (Input.GetMouseButtonDown (0)) {
+			if (Input.GetMouseButtonDown (0) 
+				|| Input.GetKeyDown(KeyCode.UpArrow)
+				|| Input.GetKeyDown(KeyCode.DownArrow)
+				|| Input.GetKeyDown(KeyCode.LeftArrow)
+				|| Input.GetKeyDown(KeyCode.RightArrow)) {
 				disableTutorial ();
 			}
 

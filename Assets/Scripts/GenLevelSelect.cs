@@ -7,8 +7,8 @@ public class GenLevelSelect : MonoBehaviour {
 
 	public GameObject levelTilePrefab;
 	public int tilesPerRow = 7;
-	public int tileOffset = 40;
-	public int vertOffset = 80;
+	public int tileOffset = 110;
+	public int vertOffset = 220;
 
 	// Use this for initialization
 	void Start () {
@@ -35,10 +35,10 @@ public class GenLevelSelect : MonoBehaviour {
 			lt_script.sceneIdx = i;
 			if (tilesThisRow == tilesPerRow) {
 				tilesThisRow = 1;
-				pos.y -= 40;
+				pos.y -= 110;
 				pos.x = anchor.x;
 			} else {
-				pos.x += 40;
+				pos.x += 110;
 				tilesThisRow++;
 			}
 		}

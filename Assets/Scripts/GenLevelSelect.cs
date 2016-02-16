@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class GenLevelSelect : MonoBehaviour {
 
 	public GameObject levelTilePrefab;
-	public int tilesPerRow = 7;
-	public int tileOffset = 110;
-	public int vertOffset = 220;
+	private int tilesPerRow = 8;
+	private int tileOffset = 90;
+	private int vertOffset = 140;
 
 	// Use this for initialization
 	void Start () {
@@ -35,10 +35,10 @@ public class GenLevelSelect : MonoBehaviour {
 			lt_script.sceneIdx = i;
 			if (tilesThisRow == tilesPerRow) {
 				tilesThisRow = 1;
-				pos.y -= 110;
+				pos.y -= tileOffset;
 				pos.x = anchor.x;
 			} else {
-				pos.x += 110;
+				pos.x += tileOffset;
 				tilesThisRow++;
 			}
 		}
